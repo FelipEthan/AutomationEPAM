@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="33.256" tests="7" skipped="0" failures="0" errors="0">
+<testcase classname="Login" name="Intentar iniciar sesión después de borrar las credenciales ingresadas" time="3.629">
+<system-out><![CDATA[
+Given El usuario está en la página de inicio de sesión......................passed
+When El usuario ingresa el nombre de usuario "standard_user"................passed
+When El usuario ingresa la contraseña "secret_saue".........................passed
+And Borra los campos de usuario.............................................passed
+And El usuario hace clic en el botón de Login...............................passed
+Then El sistema debe mostrar el mensaje de error se requiere nombre de usuario.passed
+]]></system-out>
+</testcase>
+<testcase classname="Login" name="Intentar iniciar sesión cuando se borra la contraseña después de ingresarla" time="4.2">
+<system-out><![CDATA[
+Given El usuario está en la página de inicio de sesión......................passed
+When El usuario ingresa el nombre de usuario "standard_user"................passed
+When El usuario ingresa la contraseña "secret_saue".........................passed
+And Borra los campos de contraseña..........................................passed
+And El usuario hace clic en el botón de Login...............................passed
+Then El sistema debe mostrar el mensaje de error se requiere contraseña.....passed
+]]></system-out>
+</testcase>
+<testcase classname="Login" name="Login exitoso con credenciales válidas - #1.1" time="4.469">
+<system-out><![CDATA[
+Given El usuario está en la página de inicio de sesión......................passed
+When El usuario ingresa el nombre de usuario "standard_user" y contraseña "secret_sauce".passed
+And El usuario hace clic en el botón de Login...............................passed
+Then El sistema debe mostrar el mensaje de Swag labs........................passed
+]]></system-out>
+</testcase>
+<testcase classname="Login" name="Login exitoso con credenciales válidas - #1.2" time="4.458">
+<system-out><![CDATA[
+Given El usuario está en la página de inicio de sesión......................passed
+When El usuario ingresa el nombre de usuario "problem_user" y contraseña "secret_sauce".passed
+And El usuario hace clic en el botón de Login...............................passed
+Then El sistema debe mostrar el mensaje de Swag labs........................passed
+]]></system-out>
+</testcase>
+<testcase classname="Login" name="Login exitoso con credenciales válidas - #1.3" time="9.841">
+<system-out><![CDATA[
+Given El usuario está en la página de inicio de sesión......................passed
+When El usuario ingresa el nombre de usuario "performance_glitch_user" y contraseña "secret_sauce".passed
+And El usuario hace clic en el botón de Login...............................passed
+Then El sistema debe mostrar el mensaje de Swag labs........................passed
+]]></system-out>
+</testcase>
+<testcase classname="Login" name="Login exitoso con credenciales válidas - #1.4" time="3.221">
+<system-out><![CDATA[
+Given El usuario está en la página de inicio de sesión......................passed
+When El usuario ingresa el nombre de usuario "error_user" y contraseña "secret_sauce".passed
+And El usuario hace clic en el botón de Login...............................passed
+Then El sistema debe mostrar el mensaje de Swag labs........................passed
+]]></system-out>
+</testcase>
+<testcase classname="Login" name="Login exitoso con credenciales válidas - #1.5" time="3.093">
+<system-out><![CDATA[
+Given El usuario está en la página de inicio de sesión......................passed
+When El usuario ingresa el nombre de usuario "visual_user" y contraseña "secret_sauce".passed
+And El usuario hace clic en el botón de Login...............................passed
+Then El sistema debe mostrar el mensaje de Swag labs........................passed
+]]></system-out>
+</testcase>
+</testsuite>
