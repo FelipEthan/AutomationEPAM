@@ -38,11 +38,6 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>net.serenity-bdd</groupId>
-                <artifactId>serenity-core</artifactId>
-                <version>3.0.0</version> <!-- Asegúrate de usar la versión correcta -->
-            </dependency>
-            <dependency>
                 <groupId>io.cucumber</groupId>
                 <artifactId>cucumber-java</artifactId>
                 <version>7.18.0</version>
@@ -94,17 +89,4 @@
                 <scope>test</scope>
             </dependency>
         </dependencies>
-        <!-- https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine -->
-        <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.5</version>
-                    <configuration>
-                        <includes>**/Runner*.java</includes>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </build>
     </project>
