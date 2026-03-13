@@ -4,13 +4,15 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
-import java.util.Random;
 
 // Definición de la clase BasePage
 public class BasePage {
@@ -30,28 +32,46 @@ public class BasePage {
         // Inicializa los elementos de la página usando PageFactory
         PageFactory.initElements(driver, this);
         // Maximiza la ventana del navegador
-        driver.manage().window().maximize();
-        ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
     }
     // Método estático que inicializa y configura el WebDriver
-    public static WebDriver initializeDriver() {
-        // Configura las opciones para el navegador Chrome
-        ChromeOptions chromeOptions = new ChromeOptions();
-        //chromeOptions.addArguments("--headless");  // Para ejecutar sin interfaz gráfica (opcional)
-        //chromeOptions.addArguments("--remote-debugging-port=9222");
-        WebDriverManager.chromedriver().setup();
-        // Retorna una nueva instancia de ChromeDriver con las opciones configuradas
-        return new ChromeDriver(chromeOptions);
+    public static WebDriver initializeDriver(String browserName) {
+        WebDriver driver;
+
+        // Usamos switch para inicializar el navegador correcto basado en el parámetro
+        switch (browserName) {
+            case "firefox":
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                // firefoxOptions.addArguments("--headless"); // Opcional
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver(firefoxOptions);
+                driver.manage().window().maximize();
+
+                break;
+
+            case "edge":
+                EdgeOptions edgeOptions = new EdgeOptions();
+                // edgeOptions.addArguments("--headless"); // Opcional
+                System.setProperty("webdriver.edge.driver", "src/test/resources/driver/msedgedriver.exe");
+                driver = new EdgeDriver(edgeOptions);
+                driver.manage().window().maximize();
+                break;
+
+            case "chrome":
+            default:
+                ChromeOptions chromeOptions = new ChromeOptions();
+                // chromeOptions.addArguments("--headless");
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver(chromeOptions);
+                driver.manage().window().maximize();
+                break;
+        }
+        return driver;
     }
 
     // Método que navega a la URL especificada usando el WebDriver
     public void navigateTo(String url) {
         driver.get(url);
     }
-    public void closeBrowser() {
-        driver.quit();
-    }
-
     private WebElement find(String locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
     }

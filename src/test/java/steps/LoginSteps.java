@@ -1,9 +1,12 @@
 package steps;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import pages.LoginPage;
 import pages.BasePage;
 import org.openqa.selenium.WebDriver;
@@ -12,8 +15,10 @@ public class LoginSteps {
     private WebDriver driver;
     private LoginPage loginPage;
 
-    public LoginSteps() {
-        this.driver = BasePage.initializeDriver();
+    @Before
+    public void setUp() {
+        String browser = System.getProperty("browser", "edge");
+        this.driver = BasePage.initializeDriver(browser);
         this.loginPage = new LoginPage(this.driver);
     }
 
@@ -47,11 +52,6 @@ public class LoginSteps {
         this.loginPage.clickSubmit();
     }
 
-    @Then("^El usuario debe ser redirigido a la pantalla inicial$")
-    public void screenInit() {
-        this.loginPage.textValidate();
-        this.loginPage.closessBrowser();
-    }
 
     @Then("^El sistema debe mostrar el mensaje de error se requiere nombre de usuario$")
     public void messagevalidation() {
@@ -60,7 +60,7 @@ public class LoginSteps {
 
     @Then("^El sistema debe mostrar el mensaje de error se requiere contraseña")
     public void messagevalidation2() {
-        this.loginPage.textValidate();
+        Assert.assertTrue(loginPage.textValidate());
     }
 
     @When("El usuario ingresa el nombre de usuario {string} y contraseña {string}")
@@ -71,7 +71,12 @@ public class LoginSteps {
 
     @Then("^El sistema debe mostrar el mensaje de Swag labs")
     public void messagevalidation3() {
-        this.loginPage.textValidate2();
-        driver.quit();
+        Assert.assertTrue(loginPage.textValidate2());
+    }
+    @After
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

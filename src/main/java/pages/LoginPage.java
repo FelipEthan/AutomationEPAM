@@ -1,19 +1,14 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class LoginPage extends BasePage {
 
     String element1 = "//input[@id='user-name']";
     String element2 = "//input[@id='password']";
     String element3 = "//*[@id=\"login-button\"]";
-    String element4 = "//div[@id='login_button_container']/div[@class='login-box']/form/div[@class='error-message-container error']/h3";
-    String element5 = "//*[@id=\"header_container\"]/div[1]/div[2]/div";
+    String element4 = "//h3[@data-test='error']";
+    String element5 = "//div[@class='app_logo']";
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -30,11 +25,8 @@ public class LoginPage extends BasePage {
     public void clickSubmit(){
         this.clickElement(element3);
     }
-    public void textValidate(){
-        this.textValidate(element4);
-    }
-    public void closessBrowser(){
-        this.closeBrowser();
+    public boolean textValidate(){
+        return this.textValidate(element4);
     }
     public void emptyField1() {
         this.emptyField1(element1);
@@ -42,7 +34,7 @@ public class LoginPage extends BasePage {
     public void emptyField2() {
         this.emptyField2(element2);
     }
-    public void textValidate2(){
-        this.textValidate(element5);
+    public boolean textValidate2(){
+        return this.textValidate(element5);
     }
 }
